@@ -1,0 +1,11 @@
+Here imp is i have created a network of containers and mapped the ip addresses to those containers and used them in application.properties file
+
+created db server image as follows 
+Didnot map port as i have used ip address of container and port on which mysql installed in application.properties of SPRING BOOT
+docker run -dit --name dbserver --net spring-docker-mysql --ip 172.18.0.3 -e MYSQL_ROOT_PASSWORD=Margery@123 -e MYSQL_DATABASE=spring_docker mysql:5.6
+
+
+Pulled openJDK8 image and then deployed jar file
+from which we created webserver image and exposed port on which jar file would run and then mapped that port to port of host
+Here we need to take care of port of container on which we will run our JAR file and that need to be specified in application.properties as server.port=5556
+docker run -dit --name webserver --net spring-docker-mysql --ip 172.18.0.2 -p5556:5556 webserver-image
