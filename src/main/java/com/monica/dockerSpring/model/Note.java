@@ -2,6 +2,7 @@ package com.monica.dockerSpring.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -17,19 +18,34 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "notes")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
-        allowGetters = true)
 public class Note implements Serializable{
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(updatable = true)
     private Long id;
 
     @NotBlank
+    @Column(updatable = true)
     private String title;
-
+    
     @NotBlank
+    @Column(updatable = true)
     private String content;
+
+    @Override
+	public String toString() {
+		return "Note [id=" + id + ", title=" + title + ", content=" + content + "]";
+	}
+
+	public Note(Long id, @NotBlank String title, @NotBlank String content) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
+
+	
 
 
 	public Long getId() {
@@ -50,6 +66,10 @@ public class Note implements Serializable{
 
 	public String getContent() {
 		return content;
+	}
+
+	public Note() {
+		super();
 	}
 
 	public void setContent(String content) {

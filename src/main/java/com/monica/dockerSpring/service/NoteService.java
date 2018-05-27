@@ -1,7 +1,9 @@
 package com.monica.dockerSpring.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,9 @@ public class NoteService {
 	public List<Note> listAllNotes(){
 		return (List<Note>) noteRepository.findAll();
 	}
-	
+	public Optional<Note> getById(Long id) {
+		return noteRepository.findById(id);
+	}
 	public Note insertNote(Note note) {
 		return noteRepository.save(note);
 	}
@@ -28,9 +32,15 @@ public class NoteService {
 		return "deleted";
 	}
 	
-	public String updateNote(Note newNote) {
-		noteRepository.deleteById(newNote.getId());
-		noteRepository.save(newNote);
-		return "updated";
+	public void updateNote(Long id,Note newNote) {
+		
+	 noteRepository.updateNote(id, newNote.getTitle(), newNote.getContent());
+		
 	}
+	
+	public boolean validateUser(String userid, String password) {
+        // in28minutes, dummy
+        return userid.equalsIgnoreCase("moshinde")
+                && password.equalsIgnoreCase("dummy");
+    }
 }

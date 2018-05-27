@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div>Update Note</div>
+
+ <form method="post" th:object="${noteObj}">
+ <input hidden="hidden" name="id" th:value="${noteObj.id}" />
+        Title : <input type="text" th:field="${noteObj.title}" name="title" />
+        Content : <input type="text" th:field="${noteObj.content}" name="content" /> 
+        <input type="submit" />
+    </form>
+    
+    <a th:href="@{/api/notes/}">Go back !!</a>
+</body>
+</html>

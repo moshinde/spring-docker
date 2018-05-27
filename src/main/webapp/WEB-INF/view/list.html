@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="span12">
+    <table id="myTableId" dt:table="true">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="note : ${noteList}">	
+                <td th:text="${note.id}"></td>
+                <td th:text="${note.title}"></td>
+                <td th:text="${note.content}"></td>
+                <td><a th:href="@{|/api/notes/update/${note.id}|}">UPDATE</a></td>
+                <td><a th:href="@{|/api/notes/delete/${note.id}|}">DELETE</a></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="Insert">
+    
+    <a th:href="@{/api/notes/add}">Insert here !!</a>
+    </div>
+</div>
+</body>
+</html>
