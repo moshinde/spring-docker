@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+        back:
+            image: mysql:5.6
+            ports:
+                    - "3306:3306"
+            environment:
+                    - MYSQL_ROOT_PASSWORD=Margery@123
+                    - MYSQL_DATABASE=spring_docker
+            volumes:
+                    - mysql-vol:/var/lib/mysql
+            networks:
+                 mynet:
+                    ipv4_address: 172.18.0.3
+                       
+        front:
+            build: .
+            image: war-tomcat-image
+            ports:
+                - "5557:5557"
+            networks:
+                mynet:
+                    ipv4_address: 172.18.0.2
+            depends_on:
+                - back
+volumes:
+     mysql-vol:
+
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.18.0.0/16
