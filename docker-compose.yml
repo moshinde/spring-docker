@@ -6,7 +6,7 @@ services:
             ports:
                     - "3306:3306"
             environment:
-                    - MYSQL_ROOT_PASSWORD=Margery@123
+                    - MYSQL_ROOT_PASSWORD=*******
                     - MYSQL_DATABASE=spring_docker
             volumes:
                     - mysql-vol:/var/lib/mysql
