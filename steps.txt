@@ -9,3 +9,6 @@ Pulled openJDK8 image and then deployed jar file
 from which we created webserver image and exposed port on which jar file would run and then mapped that port to port of host
 Here we need to take care of port of container on which we will run our JAR file and that need to be specified in application.properties as server.port=5556
 docker run -dit --name webserver --net spring-docker-mysql --ip 172.18.0.2 -p5556:5556 webserver-image
+
+
+_-----------
